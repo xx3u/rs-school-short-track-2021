@@ -7,15 +7,27 @@
  *
  * @example
  * matrix = [
- *  [0, 1, 1, 2],
- *  [0, 5, 0, 0],
- *  [2, 0, 3, 3]
+ *  [0, 1, 1, 2], // 4
+ *  [0, 5, 0, 0], // 5
+ *  [2, 0, 3, 3]  // 8
  * ]
  *
  * The result should be 9
  */
-function getMatrixElementsSum(/* matrix */) {
-  throw new Error('Not implemented');
+function getMatrixElementsSum(matrix) {
+  const allArr = [];
+  const exclArr = [];
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 0 && typeof matrix[i + 1] !== 'undefined') {
+        exclArr.push(matrix[i + 1][j]);
+      }
+      allArr.push(matrix[i][j]);
+    }
+  }
+  const sum = allArr.reduce((a, b) => a + b, 0);
+  const red = exclArr.reduce((a, b) => a + b, 0);
+  return sum - red;
 }
 
 module.exports = getMatrixElementsSum;
